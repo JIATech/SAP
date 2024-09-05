@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.GenerateMonthlyReportController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Generate Monthly Report" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <ComboBox fx:id="yearComboBox" promptText="Select Year"/>
+    <ComboBox fx:id="monthComboBox" promptText="Select Month"/>
+
+    <Label text="Include in Report:" style="-fx-font-weight: bold;"/>
+    <CheckBox fx:id="appointmentsCheckBox" text="Appointments"/>
+    <CheckBox fx:id="servicesCheckBox" text="Services Performed"/>
+    <CheckBox fx:id="revenueCheckBox" text="Revenue"/>
+    <CheckBox fx:id="customerSatisfactionCheckBox" text="Customer Satisfaction"/>
+
+    <DatePicker fx:id="generateDatePicker" promptText="Report Generation Date"/>
+
+    <Button text="Generate Report" onAction="#handleGenerateReport"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    <Button text="Preview Report" onAction="#handlePreviewReport"
+            style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+</VBox>

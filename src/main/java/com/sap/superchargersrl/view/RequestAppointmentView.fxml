@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.RequestAppointmentController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Request Appointment" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="customerNameField" promptText="Customer Name"/>
+    <TextField fx:id="vehicleModelField" promptText="Vehicle Model"/>
+    <TextField fx:id="vehiclePlateField" promptText="Vehicle Plate Number"/>
+    <DatePicker fx:id="appointmentDatePicker" promptText="Appointment Date"/>
+
+    <Button text="Submit Request" onAction="#handleSubmitRequest"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+</VBox>
