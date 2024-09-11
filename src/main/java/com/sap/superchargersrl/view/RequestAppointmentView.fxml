@@ -7,18 +7,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.RequestAppointmentController">
+<VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.RequestAppointmentController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Request Appointment" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="Solicitar Cita" style="-x-font-smoothing-type: gasp; -fx-font-size: 36px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 
-    <TextField fx:id="customerNameField" promptText="Customer Name"/>
-    <TextField fx:id="vehicleModelField" promptText="Vehicle Model"/>
-    <TextField fx:id="vehiclePlateField" promptText="Vehicle Plate Number"/>
-    <DatePicker fx:id="appointmentDatePicker" promptText="Appointment Date"/>
+    <TextField fx:id="customerNameField" promptText="Nombre del Cliente" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <TextField fx:id="vehicleModelField" promptText="Modelo del Vehículo" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <TextField fx:id="vehiclePlateField" promptText="Número de Matrícula del Vehículo" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <DatePicker fx:id="appointmentDatePicker" promptText="Fecha de la Cita" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 
-    <Button text="Submit Request" onAction="#handleSubmitRequest"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    <Button text="Enviar Solicitud" onAction="#handleSubmitRequest"
+            style="-x-font-smoothing-type: gasp; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 </VBox>

@@ -61,7 +61,7 @@ public class MainController {
 
     private void loadView(String fxmlFile, String title) {
         try {
-            File fxmlLocation = new File("C:\\Users\\j.arnaboldi.spb\\IdeaProjects\\SuperchargerSRL\\src\\main\\java\\com\\sap\\superchargersrl\\view\\" + fxmlFile);
+            File fxmlLocation = new File("C:\\proyectos\\TS-SAP\\SAP\\src\\main\\java\\com\\sap\\superchargersrl\\view\\" + fxmlFile);
             Scene scene = new Scene(FXMLLoader.load(fxmlLocation.toURI().toURL()));
             Stage stage = new Stage();
             stage.setTitle(title);

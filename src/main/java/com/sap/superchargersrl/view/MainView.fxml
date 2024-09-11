@@ -10,20 +10,48 @@
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
   </padding>
 
-  <Label text="Supercharger SRL Management System" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+  <Label text="Sistema de Gestión Supercharger SRL" style="-x-font-smoothing-type: gasp; -fx-font-size: 36px; -fx-font-weight: bold;">
+    <font>
+      <Font name="Verdana" size="36"/>
+    </font>
+  </Label>
 
-  <VBox spacing="10" alignment="CENTER">
-    <Button fx:id="requestAppointmentButton" text="Request Appointment" onAction="#handleRequestAppointment"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
-    <Button fx:id="assignAppointmentButton" text="Assign Appointment" onAction="#handleAssignAppointment"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
-    <Button fx:id="registerAttendanceButton" text="Register Attendance" onAction="#handleRegisterAttendance"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
-    <Button fx:id="generateConformityCertificateButton" text="Generate Conformity Certificate" onAction="#handleGenerateConformityCertificate"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
-    <Button fx:id="vehicleMaintenanceButton" text="Vehicle Maintenance" onAction="#handleVehicleMaintenance"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
-    <Button fx:id="generateMonthlyReportButton" text="Generate Monthly Report" onAction="#handleGenerateMonthlyReport"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" maxWidth="Infinity"/>
+  <VBox spacing="15" alignment="CENTER">
+    <Button fx:id="requestAppointmentButton" text="Solicitar Cita" onAction="#handleRequestAppointment"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
+    <Button fx:id="assignAppointmentButton" text="Asignar Cita" onAction="#handleAssignAppointment"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
+    <Button fx:id="registerAttendanceButton" text="Registrar Asistencia" onAction="#handleRegisterAttendance"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
+    <Button fx:id="generateConformityCertificateButton" text="Generar Certificado de Conformidad" onAction="#handleGenerateConformityCertificate"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
+    <Button fx:id="vehicleMaintenanceButton" text="Mantenimiento de Vehículos" onAction="#handleVehicleMaintenance"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
+    <Button fx:id="generateMonthlyReportButton" text="Generar Informe Mensual" onAction="#handleGenerateMonthlyReport"
+            style="-x-font-smoothing-type: gasp; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;" maxWidth="Infinity">
+      <font>
+        <Font name="Verdana" size="18"/>
+      </font>
+    </Button>
   </VBox>
 </VBox>

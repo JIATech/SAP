@@ -8,19 +8,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.RegisterAttendanceController">
+<VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sap.superchargersrl.controller.RegisterAttendanceController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Register Attendance" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="Registrar Asistencia" style="-x-font-smoothing-type: gasp; -fx-font-size: 36px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 
-    <DatePicker fx:id="attendanceDatePicker" promptText="Attendance Date"/>
-    <ComboBox fx:id="employeeComboBox" promptText="Select Employee"/>
-    <TextField fx:id="timeInField" promptText="Time In (HH:MM)"/>
-    <TextField fx:id="timeOutField" promptText="Time Out (HH:MM)"/>
-    <TextField fx:id="notesField" promptText="Notes (optional)"/>
+    <DatePicker fx:id="attendanceDatePicker" promptText="Fecha de Asistencia" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <ComboBox fx:id="employeeComboBox" promptText="Seleccionar Empleado" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <TextField fx:id="timeInField" promptText="Hora de Entrada (HH:MM)" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <TextField fx:id="timeOutField" promptText="Hora de Salida (HH:MM)" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <TextField fx:id="notesField" promptText="Notas (opcional)" style="-x-font-smoothing-type: gasp; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 
-    <Button text="Register Attendance" onAction="#handleRegisterAttendance"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    <Button text="Registrar Asistencia" onAction="#handleRegisterAttendance"
+            style="-x-font-smoothing-type: gasp; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
 </VBox>

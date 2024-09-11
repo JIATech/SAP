@@ -30,7 +30,7 @@ public class RequestAppointmentController {
         LocalDate appointmentDate = appointmentDatePicker.getValue();
 
         if (customerName.isEmpty() || vehicleModel.isEmpty() || vehiclePlate.isEmpty() || appointmentDate == null) {
-            showAlert("Error", "All fields are required.");
+            showAlert("Error", "Todos los campos son requeridos.");
             return;
         }
 

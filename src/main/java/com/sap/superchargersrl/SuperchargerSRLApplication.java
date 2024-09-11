@@ -19,7 +19,7 @@ public class SuperchargerSRLApplication extends Application {
     public void start(Stage primaryStage) {
         try {
             // Tuve que usar ruta absoluta para que funcione en mi pc
-            File fxmlFile = new File("C:\\Users\\j.arnaboldi.spb\\IdeaProjects\\SuperchargerSRL\\src\\main\\java\\com\\sap\\superchargersrl\\view\\MainView.fxml");
+            File fxmlFile = new File("C:\\proyectos\\TS-SAP\\SAP\\src\\main\\java\\com\\sap\\superchargersrl\\view\\MainView.fxml");
             if (fxmlFile == null) {
                 LOGGER.severe("FXML file not found!");
                 // Optionally show a dialog or alert to the user
