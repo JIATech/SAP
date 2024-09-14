@@ -7,7 +7,7 @@ module com.sap.superchargersrl {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
     requires eu.hansolo.tilesfx;
-    requires java.logging;
+    requires java.sql;
 
 
     opens com.sap.superchargersrl to javafx.fxml;

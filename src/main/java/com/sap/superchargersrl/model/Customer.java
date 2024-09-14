@@ -4,17 +4,21 @@ import java.util.UUID;
 
 public class Customer {
     private UUID id;
-    private String firstName;
-    private String lastName;
+    private String nombre;
+    private String apellido;
     private String email;
-    private String phoneNumber;
+    private String tipoDocumento;
+    private String numeroDocumento;
+    private String telefono;
 
-    public Customer(String firstName, String lastName, String email, String phoneNumber) {
+    public Customer() {
         this.id = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.telefono = telefono;
     }
 
     // Getters and setters
@@ -22,20 +26,20 @@ public class Customer {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getEmail() {
@@ -46,16 +50,37 @@ public class Customer {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getNumeroDocumento() { this.numeroDocumento = numeroDocumento;
+        return null;
     }
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return nombre + " " + apellido;
+    }
+
+
+    public void setId(int id) {
+
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 }
