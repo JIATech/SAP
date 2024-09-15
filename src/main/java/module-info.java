@@ -8,6 +8,8 @@ module com.sap.superchargersrl {
     requires net.synedra.validatorfx;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires mysql.connector.j;
+    requires org.slf4j;
 
 
     opens com.sap.superchargersrl to javafx.fxml;

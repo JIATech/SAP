@@ -13,17 +13,17 @@ import javafx.stage.Stage;
 
 public class SuperchargerSRLApplication extends Application {
 
+    // Puse un Logger porque no podía saber la razón por la que no encontraba el MainView.fxml
     private static final Logger LOGGER = Logger.getLogger(SuperchargerSRLApplication.class.getName());
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Tuve que usar ruta absoluta para que funcione en mi pc
+            // Luego de implementar el logger y probar varias opciones, la ruta absoluta es la única forma que funciona en mi pc.
             File fxmlFile = new File("C:\\proyectos\\TS-SAP\\SAP\\src\\main\\java\\com\\sap\\superchargersrl\\view\\MainView.fxml");
             if (fxmlFile == null) {
                 LOGGER.severe("FXML file not found!");
-                // Optionally show a dialog or alert to the user
-                return; // Exit start method if FXML is not found
+                return;
             } else {
                 LOGGER.info("FXML file found at: " + fxmlFile);
             }
@@ -34,9 +34,7 @@ public class SuperchargerSRLApplication extends Application {
             primaryStage.setTitle("Supercharger SRL Management System");
             primaryStage.show();
         } catch (IOException e) {
-            // Log the exception
             LOGGER.log(Level.SEVERE, "Exception occurred", e);
-            // Optionally show a dialog or alert to the user
         }
     }
 

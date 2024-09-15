@@ -14,7 +14,9 @@ public class DatabaseConnection {
     static {
         try (InputStream is = DatabaseConnection.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
             props.load(is);
-        } catch (IOException e) {
+            // Explicitly load the MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -24,6 +26,13 @@ public class DatabaseConnection {
         String user = props.getProperty("db.user");
         String password = props.getProperty("db.password");
 
-        return DriverManager.getConnection(url, user, password);
+        Properties connectionProps = new Properties();
+        connectionProps.setProperty("user", user);
+        connectionProps.setProperty("password", password);
+        connectionProps.setProperty("useSSL", "true");
+        connectionProps.setProperty("verifyServerCertificate", "true");
+        connectionProps.setProperty("requireSSL", "true");
+
+        return DriverManager.getConnection(url, connectionProps);
     }
 }

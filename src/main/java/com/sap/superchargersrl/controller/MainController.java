@@ -1,7 +1,8 @@
 package com.sap.superchargersrl.controller;
 
 import java.io.File;
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class MainController {
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @FXML
     private Button requestAppointmentButton;
@@ -67,9 +69,8 @@ public class MainController {
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // In a real application, you'd want to handle this exception more gracefully
+        } catch (Exception e) {
+            logger.error("Ha ocurrido un error.", e);
         }
     }
 }
