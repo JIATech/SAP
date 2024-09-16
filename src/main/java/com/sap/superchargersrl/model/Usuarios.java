@@ -1,61 +1,48 @@
 package com.sap.superchargersrl.model;
 
-import java.util.UUID;
-
 public class Usuarios {
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String specialization;
-    private String employeeId;
+    private Integer id_usuario;
+    private String nombre;
+    private String apellido;
+    private String id_mecanico;
 
-    public Usuarios(String firstName, String lastName, String specialization, String employeeId) {
-        this.id = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.specialization = specialization;
-        this.employeeId = employeeId;
+    public Usuarios(String nombre, String apellido, String id_mecanico) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.id_mecanico = id_mecanico;
     }
 
     // Getters and setters
-    public UUID getId() {
-        return id;
+    public Integer getId() {
+        return id_usuario;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public String getId_mecanico() {
+        return id_mecanico;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setId_mecanico(String id_mecanico) {
+        this.id_mecanico = id_mecanico;
     }
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + specialization + ")";
+        return nombre + " " + apellido;
     }
 }

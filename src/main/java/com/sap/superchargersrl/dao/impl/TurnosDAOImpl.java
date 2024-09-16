@@ -5,6 +5,7 @@ import com.sap.superchargersrl.model.Turnos;
 import com.sap.superchargersrl.util.DatabaseConnection;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +13,23 @@ public class TurnosDAOImpl implements TurnosDAO {
 
     @Override
     public void save(Turnos turnos) {
-        String sql = "INSERT INTO appointments (fecha, hora, estado, customerId, vehicleId, mechanicId) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Turnos (fecha, hora, estado, id_cliente, id_vehiculo, id_mecanico) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setDate(1, new java.sql.Date(turnos.getFecha().getTime()));
-            pstmt.setTime(2, new java.sql.Time(turnos.getHora().getTime()));
-            pstmt.setString(3, turnos.getEstado());
-            pstmt.setInt(4, turnos.getCustomerId());
-            pstmt.setInt(5, turnos.getVehicleId());
-            pstmt.setInt(6, turnos.getMechanicId());
+            // Splitting LocalDateTime into Date and Time
+            LocalDateTime dateTime = turnos.getFecha();
+            Date date = Date.valueOf(dateTime.toLocalDate());
+            Time time = Time.valueOf(dateTime.toLocalTime());
+
+            pstmt.setDate(1, date);
+            pstmt.setTime(2, time);
+            pstmt.setString(3, turnos.getStatus());
+
+            // Converting UUID to String to avoid type mismatch
+            pstmt.setString(4, turnos.getCustomerId().toString());
+            pstmt.setString(5, turnos.getVehicleId().toString());
+            pstmt.setString(6, turnos.getAssignedMechanicId().toString());
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -31,7 +39,7 @@ public class TurnosDAOImpl implements TurnosDAO {
 
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    turnos.setId(generatedKeys.getInt(1));
+                    turnos.setId(UUID.fromString(generatedKeys.getString(1)));
                 } else {
                     throw new SQLException("Creating appointment failed, no ID obtained.");
                 }
@@ -43,7 +51,7 @@ public class TurnosDAOImpl implements TurnosDAO {
 
     @Override
     public Turnos findById(int id) {
-        String sql = "SELECT * FROM appointments WHERE id = ?";
+        String sql = "SELECT * FROM Turnos WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -62,7 +70,7 @@ public class TurnosDAOImpl implements TurnosDAO {
     @Override
     public List<Turnos> findAll() {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments";
+        String sql = "SELECT * FROM Turnos";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -79,7 +87,7 @@ public class TurnosDAOImpl implements TurnosDAO {
     @Override
     public List<Turnos> findByDate(java.util.Date date) {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE fecha = ?";
+        String sql = "SELECT * FROM Turnos WHERE fecha = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -97,7 +105,7 @@ public class TurnosDAOImpl implements TurnosDAO {
 
     @Override
     public void update(Turnos turnos) {
-        String sql = "UPDATE appointments SET fecha = ?, hora = ?, estado = ?, customerId = ?, vehicleId = ?, mechanicId = ? WHERE id = ?";
+        String sql = "UPDATE Turnos SET fecha = ?, hora = ?, estado = ?, id_cliente = ?, id_vehiculo = ?, id_mecnico = ? WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -117,7 +125,7 @@ public class TurnosDAOImpl implements TurnosDAO {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM appointments WHERE id = ?";
+        String sql = "DELETE FROM Turnos WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -129,9 +137,9 @@ public class TurnosDAOImpl implements TurnosDAO {
     }
 
     @Override
-    public List<Turnos> findByCustomerId(int customerId) {
+    public List<Turnos> findByClienteId(int customerId) {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE customerId = ?";
+        String sql = "SELECT * FROM Turnos WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -150,7 +158,7 @@ public class TurnosDAOImpl implements TurnosDAO {
     @Override
     public List<Turnos> findByVehicleId(int vehicleId) {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE vehicleId = ?";
+        String sql = "SELECT * FROM Turnos WHERE id_vehiculo = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -169,7 +177,7 @@ public class TurnosDAOImpl implements TurnosDAO {
     @Override
     public List<Turnos> findByMechanicId(int mechanicId) {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE mechanicId = ?";
+        String sql = "SELECT * FROM Turnos WHERE id_mecanico = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -188,7 +196,7 @@ public class TurnosDAOImpl implements TurnosDAO {
     @Override
     public List<Turnos> findByStatus(String estado) {
         List<Turnos> turnos = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE estado = ?";
+        String sql = "SELECT * FROM Turnos WHERE estado = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -206,7 +214,7 @@ public class TurnosDAOImpl implements TurnosDAO {
 
     @Override
     public void updateStatus(int id, String estado) {
-        String sql = "UPDATE appointments SET estado = ? WHERE id = ?";
+        String sql = "UPDATE Turnos SET estado = ? WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -218,7 +226,7 @@ public class TurnosDAOImpl implements TurnosDAO {
         }
     }
 
-    private Turnos extractAppointmentFromResultSet(ResultSet rs) throws SQLException {
+    private Turnos extractTurnosFromResultSet(ResultSet rs) throws SQLException {
         Turnos turnos = new Turnos();
         turnos.setId(rs.getInt("id"));
         turnos.setFecha(rs.getDate("fecha"));

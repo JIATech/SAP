@@ -60,9 +60,9 @@ public class ServicioMecanico {
         return usuariosDAO.getActivities(mechanicId, appointmentId);
     }
 
-    private boolean isValidMechanic(Usuarios usuarios) {
-        return usuarios != null &&
-                usuarios.getNombre() != null && !usuarios.getNombre().isEmpty() &&
-                usuarios.getApellido() != null && !usuarios.getApellido().isEmpty() &&
+    private boolean isValidMechanic(Usuarios Usuarios) {
+        return Usuarios != null &&
+                Usuarios.getNombre() != null && !Usuarios.getNombre().isEmpty() &&
+                Usuarios.getApellido() != null && !Usuarios.getApellido().isEmpty();
     }
 }

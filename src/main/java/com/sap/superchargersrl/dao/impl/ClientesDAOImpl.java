@@ -1,26 +1,42 @@
 package com.sap.superchargersrl.dao.impl;
 
-import com.sap.superchargersrl.dao.CustomerDAO;
-import com.sap.superchargersrl.model.Customer;
+import com.sap.superchargersrl.dao.ClientesDAO;
+import com.sap.superchargersrl.model.Clientes;
 import com.sap.superchargersrl.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClientesDAOImpl implements CustomerDAO {
+public class ClientesDAOImpl implements ClientesDAO {
 
     @Override
-    public void save(Customer customer) {
-        String sql = "INSERT INTO customers (nombre, apellido, tipoDocumento, numeroDocumento, telefono) VALUES (?, ?, ?, ?, ?)";
+    public Clientes getById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Clientes> getAll() {
+        return List.of();
+    }
+
+    @Override
+    public void insert(Clientes clientes) {
+
+    }
+
+
+    @Override
+    public void save(Clientes clientes) {
+        String sql = "INSERT INTO Clientes (nombre, apellido, tipo_documento, numero_documento, telefono, email) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setString(1, customer.getNombre());
-            pstmt.setString(2, customer.getApellido());
-            pstmt.setString(3, customer.getTipoDocumento());
-            pstmt.setString(4, customer.getNumeroDocumento());
-            pstmt.setString(5, customer.getTelefono());
+            pstmt.setString(1, clientes.getNombre());
+            pstmt.setString(2, clientes.getApellido());
+            pstmt.setString(3, clientes.getTipoDocumento());
+            pstmt.setString(4, clientes.getNumeroDocumento());
+            pstmt.setString(5, clientes.getTelefono());
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -30,7 +46,7 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
 
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    customer.setId(generatedKeys.getInt(1));
+                    clientes.setIdCliente(generatedKeys.getInt(1));
                 } else {
                     throw new SQLException("Creating customer failed, no ID obtained.");
                 }
@@ -41,15 +57,15 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer findById(int id) {
-        String sql = "SELECT * FROM customers WHERE id = ?";
+    public Clientes findById(int id) {
+        String sql = "SELECT * FROM Clientes WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return extractCustomerFromResultSet(rs);
+                    return extractClientesFromResultSet(rs);
                 }
             }
         } catch (SQLException e) {
@@ -59,15 +75,15 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> findAll() {
-        List<Customer> customers = new ArrayList<>();
-        String sql = "SELECT * FROM customers";
+    public List<Clientes> findAll() {
+        List<Clientes> customers = new ArrayList<>();
+        String sql = "SELECT * FROM Clientes";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                customers.add(extractCustomerFromResultSet(rs));
+                Clientes.add(extractClientesFromResultSet(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,15 +92,15 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer findByDocumentNumber(String documentNumber) {
-        String sql = "SELECT * FROM customers WHERE numeroDocumento = ?";
+    public Clientes findByDocumentNumber(String documentNumber) {
+        String sql = "SELECT * FROM Clientes WHERE numero_documento = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, documentNumber);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return extractCustomerFromResultSet(rs);
+                    return extractClientesFromResultSet(rs);
                 }
             }
         } catch (SQLException e) {
@@ -94,17 +110,17 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public void update(Customer customer) {
-        String sql = "UPDATE customers SET nombre = ?, apellido = ?, tipoDocumento = ?, numeroDocumento = ?, telefono = ? WHERE id = ?";
+    public void update(Clientes clientes) {
+        String sql = "UPDATE Clientes SET nombre = ?, apellido = ?, tipo_documento = ?, numero_documento = ?, telefono = ? WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, customer.getNombre());
-            pstmt.setString(2, customer.getApellido());
-            pstmt.setString(3, customer.getTipoDocumento());
-            pstmt.setString(4, customer.getNumeroDocumento());
-            pstmt.setString(5, customer.getTelefono());
-            pstmt.setInt(6, customer.getId());
+            pstmt.setString(1, clientes.getNombre());
+            pstmt.setString(2, clientes.getApellido());
+            pstmt.setString(3, clientes.getTipoDocumento());
+            pstmt.setString(4, clientes.getNumeroDocumento());
+            pstmt.setString(5, clientes.getTelefono());
+            pstmt.setInt(6, clientes.getIdCliente());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -114,7 +130,7 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM customers WHERE id = ?";
+        String sql = "DELETE FROM Clientes WHERE id_cliente = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -126,17 +142,17 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> findByName(String name) {
-        List<Customer> customers = new ArrayList<>();
-        String sql = "SELECT * FROM customers WHERE nombre LIKE ? OR apellido LIKE ?";
+    public List<Clientes> findByName(String nombre) {
+        List<Clientes> customers = new ArrayList<>();
+        String sql = "SELECT * FROM Clientes WHERE nombre LIKE ? OR apellido LIKE ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "%" + name + "%");
-            pstmt.setString(2, "%" + name + "%");
+            pstmt.setString(1, "%" + nombre + "%");
+            pstmt.setString(2, "%" + nombre + "%");
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    customers.add(extractCustomerFromResultSet(rs));
+                    Clientes.add(extractClientesFromResultSet(rs));
                 }
             }
         } catch (SQLException e) {
@@ -145,14 +161,15 @@ public abstract class ClientesDAOImpl implements CustomerDAO {
         return customers;
     }
 
-    private Customer extractCustomerFromResultSet(ResultSet rs) throws SQLException {
-        Customer customer = new Customer();
-        customer.setId(rs.getInt("id"));
-        customer.setNombre(rs.getString("nombre"));
-        customer.setApellido(rs.getString("apellido"));
-        customer.setTipoDocumento(rs.getString("tipoDocumento"));
-        customer.setNumeroDocumento(rs.getString("numeroDocumento"));
-        customer.setTelefono(rs.getString("telefono"));
-        return customer;
+    private Clientes extractClientesFromResultSet(ResultSet rs) throws SQLException {
+        return new Clientes(
+                rs.getInt("id_cliente"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("tipo_documento"),
+                rs.getString("numero_documento"),
+                rs.getString("telefono"),
+                rs.getString("email")
+        );
     }
 }

@@ -20,7 +20,7 @@ public class SuperchargerSRLApplication extends Application {
     public void start(Stage primaryStage) {
         try {
             // Luego de implementar el logger y probar varias opciones, la ruta absoluta es la única forma que funciona en mi pc.
-            File fxmlFile = new File("C:\\proyectos\\TS-SAP\\SAP\\src\\main\\java\\com\\sap\\superchargersrl\\view\\MainView.fxml");
+            File fxmlFile = new File("C:\\proyectos\\TS-SAP\\SAP\\src\\main\\java\\com\\sap\\superchargersrl\\view\\LoginView.fxml");
             if (fxmlFile == null) {
                 LOGGER.severe("FXML file not found!");
                 return;

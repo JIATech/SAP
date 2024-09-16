@@ -1,59 +1,60 @@
 package com.sap.superchargersrl.service;
 
-import com.sap.superchargersrl.dao.CustomerDAO;
+import com.sap.superchargersrl.dao.ClientesDAO;
 import com.sap.superchargersrl.dao.impl.ClientesDAOImpl;
-import com.sap.superchargersrl.model.Customer;
+import com.sap.superchargersrl.model.Clientes;
 
 import java.util.List;
 
 public class ServicioClientes {
 
-    private CustomerDAO customerDAO;
+    private final ClientesDAO ClientesDAO;
 
     public ServicioClientes() {
-        this.customerDAO = new ClientesDAOImpl();
+        this.ClientesDAO = new ClientesDAOImpl();
     }
 
-    public void registerCustomer(Customer customer) {
+    public void registrarCliente(Clientes clientes) {
         // Add any business logic for customer registration
-        if (isValidCustomer(customer)) {
-            customerDAO.save(customer);
+        if (isValidCustomer(clientes)) {
+            ClientesDAO.save(clientes);
         } else {
             throw new IllegalArgumentException("Invalid customer data");
         }
     }
 
-    public Customer getCustomerById(int id) {
-        return customerDAO.findById(id);
+    public Clientes getClientesById(int id) {
+        return ClientesDAO.findById(id);
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerDAO.findAll();
+    public List<Clientes> getAllClientes() {
+        return ClientesDAO.findAll();
     }
 
-    public void updateCustomer(Customer customer) {
-        if (isValidCustomer(customer)) {
-            customerDAO.update(customer);
+    public void updateCliente(Clientes clientes) {
+        if (isValidCustomer(clientes)) {
+            ClientesDAO.update(clientes);
         } else {
             throw new IllegalArgumentException("Invalid customer data");
         }
     }
 
-    public void deleteCustomer(int id) {
-        customerDAO.delete(id);
+    public void deleteCliente(int id) {
+        ClientesDAO.delete(id);
     }
 
-    public List<Customer> searchCustomersByName(String name) {
-        return customerDAO.findByName(name);
+    public List<Clientes> searchClientesByName(String name) {
+        return ClientesDAO.findByName(name);
     }
 
-    private boolean isValidCustomer(Customer customer) {
+    private boolean isValidCustomer(Clientes customer) {
         // Implement validation logic
         return customer != null &&
                 customer.getNombre() != null && !customer.getNombre().isEmpty() &&
                 customer.getApellido() != null && !customer.getApellido().isEmpty() &&
                 customer.getNumeroDocumento() != null && !customer.getNumeroDocumento().isEmpty();
     }
+
 
     // Add more business-specific methods as needed
 }

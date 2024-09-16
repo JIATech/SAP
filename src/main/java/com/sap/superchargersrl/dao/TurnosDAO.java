@@ -21,6 +21,9 @@ public interface TurnosDAO {
 
     // Additional methods specific to your business needs
     List<Turnos> findByCustomerId(int customerId);
+
+    List<Turnos> findByClienteId(int customerId);
+
     List<Turnos> findByVehicleId(int vehicleId);
     List<Turnos> findByMechanicId(int mechanicId);
     List<Turnos> findByStatus(String estado);

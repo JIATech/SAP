@@ -202,10 +202,8 @@ public class UsuariosDAOImpl implements UsuariosDAO {
 
     private Usuarios extractMechanicFromResultSet(ResultSet rs) throws SQLException {
         Usuarios usuarios = new Usuarios();
-        usuarios.setId(rs.getInt("id"));
         usuarios.setNombre(rs.getString("nombre"));
         usuarios.setApellido(rs.getString("apellido"));
-        usuarios.setEspecialidad(rs.getString("especialidad"));
         return usuarios;
     }
 }

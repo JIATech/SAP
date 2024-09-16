@@ -1,64 +1,76 @@
 package com.sap.superchargersrl.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
 
 public class HorariosMecanicos {
-    private UUID id;
-    private UUID employeeId;
-    private LocalDate date;
-    private LocalTime timeIn;
-    private LocalTime timeOut;
-    private String notes;
-
-    public HorariosMecanicos(UUID employeeId, LocalDate date, LocalTime timeIn) {
-        this.id = UUID.randomUUID();
-        this.employeeId = employeeId;
-        this.date = date;
-        this.timeIn = timeIn;
+    private int id_horario;
+    private int id_mecanico;
+    private LocalDate fecha;
+    private LocalTime hora_inicio;
+    private LocalTime hora_fin;
+    private HorariosMecanicos extractHorariosMecanicosFromResultSet(ResultSet rs) throws SQLException {
+        HorariosMecanicos record = new HorariosMecanicos();
+        record.setId_horario(rs.getInt("id"));
+        record.setId_mecanico(rs.getInt("employeeId"));
+        record.setFecha(rs.getDate("date").toLocalDate());
+        record.setHora_inicio(rs.getTime("timeIn").toLocalTime());
+        record.setHora_fin(rs.getTime("timeOut").toLocalTime());
+        return record;
     }
 
-    // Getters and setters
-    public UUID getId() {
-        return id;
+    // Constructor vacío
+    public HorariosMecanicos() {
     }
 
-    public UUID getEmployeeId() {
-        return employeeId;
+    // Getters y setters
+    public int getId_horario() {
+        return id_horario;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public void setId_horario(int id_horario) {
+        this.id_horario = id_horario;
     }
 
-    public LocalTime getTimeIn() {
-        return timeIn;
+    public int getId_mecanico() {
+        return id_mecanico;
     }
 
-    public void setTimeIn(LocalTime timeIn) {
-        this.timeIn = timeIn;
+    public void setId_mecanico(int id_mecanico) {
+        this.id_mecanico = id_mecanico;
     }
 
-    public LocalTime getTimeOut() {
-        return timeOut;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public void setTimeOut(LocalTime timeOut) {
-        this.timeOut = timeOut;
+    public long setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
-    public String getNotes() {
-        return notes;
+    public Time getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setHora_inicio(LocalTime hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public Time getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(LocalTime hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
     @Override
     public String toString() {
-        return "Attendance for Employee " + employeeId + " on " + date +
-                " (In: " + timeIn + ", Out: " + (timeOut != null ? timeOut : "Not recorded") + ")";
+        return "Attendance for Mechanic " + id_mecanico + " on " + fecha +
+                " (In: " + hora_inicio + ", Out: " + (hora_fin != null ? hora_fin : "Not recorded") + ")";
     }
+
 }

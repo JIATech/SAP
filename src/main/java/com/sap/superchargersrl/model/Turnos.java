@@ -1,87 +1,85 @@
 package com.sap.superchargersrl.model;
 
+import javafx.scene.text.Text;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Turnos {
-    private UUID id;
-    private UUID customerId;
-    private UUID vehicleId;
-    private LocalDateTime appointmentDateTime;
-    private String serviceType;
-    private String status; // e.g., "Scheduled", "Completed", "Cancelled"
-    private UUID assignedMechanicId;
+    private Integer id_turno;
+    private Integer id_cliente;
+    private Integer id_vehiculo;
+    private LocalDateTime fecha;
+    private Time hora;
+    private String estado; // e.g., "Scheduled", "Completed", "Cancelled"
+    private Integer id_mecanico;
 
-    public Turnos(UUID customerId, UUID vehicleId, LocalDateTime appointmentDateTime, String serviceType) {
-        this.id = UUID.randomUUID();
-        this.customerId = customerId;
-        this.vehicleId = vehicleId;
-        this.appointmentDateTime = appointmentDateTime;
-        this.serviceType = serviceType;
-        this.status = "Scheduled";
+    public Turnos(Integer id_turno, Integer id_cliente, Integer id_vehiculo, LocalDateTime fecha, Time hora, String estado, Text observaciones) {
+        this.id_turno = id_turno;
+        this.id_cliente = id_cliente;
+        this.id_vehiculo = id_vehiculo;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = "Pendiente";
     }
 
     // Getters and setters
-    public UUID getId() {
-        return id;
+    public Integer getId() {
+        return id_turno;
     }
 
-    public UUID getCustomerId() {
-        return customerId;
+    public Integer getCustomerId() {
+        return id_cliente;
     }
 
-    public UUID getVehicleId() {
-        return vehicleId;
+    public Integer getVehicleId() {
+        return id_vehiculo;
     }
 
-    public LocalDateTime getAppointmentDateTime() {
-        return appointmentDateTime;
+    public LocalDateTime getFecha() {
+        return fecha;
     }
 
-    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
-        this.appointmentDateTime = appointmentDateTime;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 
     public String getStatus() {
-        return status;
+        return estado;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String estado) {
+        this.estado = estado;
     }
 
-    public UUID getAssignedMechanicId() {
-        return assignedMechanicId;
+    public Integer getAssignedMechanicId() {
+        return id_mecanico;
     }
 
-    public void setAssignedMechanicId(UUID assignedMechanicId) {
-        this.assignedMechanicId = assignedMechanicId;
+    public static void setAssignedMechanicId(Integer id_mecanico) {
+        this.id_mecanico = id_mecanico;
     }
 
     @Override
     public String toString() {
-        return "Appointment for Vehicle " + vehicleId + " on " + appointmentDateTime + " (" + status + ")";
+        return "Appointment for Vehicle " + id_vehiculo + " on " + fecha + " (" + estado + ")";
     }
 
-    public void setFecha(Date date) {
-        this.appointmentDateTime = date.toLocalDate().atStartOfDay();
+    public static void setFecha(Date date) {
+        this.fecha = date.toLocalDate().atStartOfDay();
     }
 
-    public void setHora(Time time) {
-        this.appointmentDateTime = time.toLocalTime().atDate(LocalDateTime.now().toLocalDate());
+    public static void setHora(Time time) {
+        this.fecha = time.toLocalTime().atDate(LocalDateTime.now().toLocalDate());
     }
 
-    public void setMechanicId(UUID id) {
-        this.assignedMechanicId = id;
+    public void setMechanicId(Integer id_mecanico) {
+        this.id_mecanico = id_mecanico;
+    }
+
+    public Time getHora() {
+        return hora;
     }
 }

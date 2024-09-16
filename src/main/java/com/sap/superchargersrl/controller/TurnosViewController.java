@@ -1,5 +1,6 @@
 package com.sap.superchargersrl.controller;
 
+import com.sap.superchargersrl.model.Servicios;
 import com.sap.superchargersrl.model.Turnos;
 import com.sap.superchargersrl.model.Usuarios;
 import com.sap.superchargersrl.service.ServicioTurnos;
@@ -29,7 +30,6 @@ public class TurnosViewController {
 
     @FXML
     public void initialize() {
-        populateTimeComboBox();
         loadMechanics();
     }
 
@@ -44,34 +44,30 @@ public class TurnosViewController {
 
     @FXML
     public void handleCreateAppointment() {
-        LocalDate date = datePicker.getValue();
-        LocalTime time = timeComboBox.getValue();
-        Usuarios usuarios = mechanicComboBox.getValue();
+        LocalDate selectedDate = datePicker.getValue();
+        LocalTime selectedTime = timeComboBox.getValue();
+        Usuarios selectedMechanic = mechanicComboBox.getValue();
 
-        if (date != null && time != null && usuarios != null) {
-            Turnos turnos = new Turnos();
-            turnos.setFecha(java.sql.Date.valueOf(date));
-            turnos.setHora(java.sql.Time.valueOf(time));
-            turnos.setMechanicId(usuarios.getId());
-            // Set other necessary fields
+        if (selectedDate != null && selectedTime != null && selectedMechanic != null) {
+            Turnos newAppointment = initializeTurnos(selectedDate, selectedTime, selectedMechanic);
 
             try {
-                servicioTurnos.scheduleAppointment(turnos);
-                // Show success message and clear fields
+                servicioTurnos.scheduleAppointment(newAppointment);
+                System.out.println("Appointment successfully created!");
             } catch (IllegalArgumentException e) {
-                // Show error message to user
                 System.out.println("Error: " + e.getMessage());
             }
+        } else {
+            System.out.println("Please select a date, time, and mechanic.");
         }
     }
 
-    private void populateTimeComboBox() {
-        LocalTime start = LocalTime.of(9, 0);
-        LocalTime end = LocalTime.of(17, 0);
-        while (start.isBefore(end)) {
-            timeComboBox.getItems().add(start);
-            start = start.plusMinutes(30);
-        }
+    private Turnos initializeTurnos(LocalDate date, LocalTime time, Usuarios mechanic) {
+        Turnos turnos = new Turnos(null, null, null, date.atTime(time), java.sql.Time.valueOf(time), "Pendiente", null);
+        Turnos.setFecha(java.sql.Date.valueOf(date));
+        Turnos.setHora(java.sql.Time.valueOf(time));
+        Turnos.setAssignedMechanicId(mechanic.getId());
+        return turnos;
     }
 
     private void loadMechanics() {
